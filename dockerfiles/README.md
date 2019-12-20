@@ -30,7 +30,7 @@ The following arguments are also required but can be specified via config file:
 With arguments correctly populated, the following command will run the container on OS X:
 
 ```
-docker run -e DATABASE_NAME=vulcanize_public -e DATABASE_HOSTNAME=host.docker.internal -e DATABASE_PORT=5432 -e DATABASE_USER=user -e DATABASE_PASSWORD=pw -e CLIENT_IPCPATH=https://kovan.infura.io/v3/token -e FILESYSTEM_STORAGEDIFFSPATH=/data/<csv_filename> -v <csv_filepath>:/data -it execute:latest
+docker run -e DATABASE_NAME=vulcanize_public -e DATABASE_HOSTNAME=host.docker.internal -e DATABASE_PORT=5432 -e DATABASE_USER=user -e DATABASE_PASSWORD=pw -e CLIENT_IPCPATH=https://kovan.infura.io/v3/token -e FILESYSTEM_STORAGEDIFFSPATH=/data/<csv_filename> -v <csv_filepath>:/data --env-file dockerfiles/env.txt -it execute:latest
 ```
 
 #### Explanation:
