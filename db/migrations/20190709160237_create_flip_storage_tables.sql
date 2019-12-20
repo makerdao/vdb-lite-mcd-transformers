@@ -260,8 +260,6 @@ CREATE TABLE maker.flip_kicks
 
 CREATE INDEX flip_kicks_header_id_index
     ON maker.flip_kicks (header_id);
-CREATE INDEX flip_kicks_kicks_index
-    ON maker.flip_kicks (kicks);
 CREATE INDEX flip_kicks_address_index
     ON maker.flip_kicks (address_id);
 -- prevent naming conflict with maker.flip_kick in postgraphile

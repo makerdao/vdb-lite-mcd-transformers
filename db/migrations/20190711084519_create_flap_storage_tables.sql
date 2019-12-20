@@ -197,9 +197,6 @@ COMMENT ON TABLE maker.flap_kicks
     IS E'@name flapKicksStorage\n@omit';
 
 
--- prevent naming conflict with maker.flap_kick in postgraphile
--- COMMENT ON TABLE maker.flap_kicks IS E'@name flapKicksStorage';
-
 CREATE TABLE maker.flap_live
 (
     id         SERIAL PRIMARY KEY,

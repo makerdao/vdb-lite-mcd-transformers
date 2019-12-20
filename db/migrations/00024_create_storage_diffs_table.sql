@@ -10,5 +10,8 @@ CREATE TABLE public.storage_diff
     UNIQUE (block_height, block_hash, hashed_address, storage_key, storage_value)
 );
 
+COMMENT ON TABLE public.storage_diff
+    IS E'@omit';
+
 -- +goose Down
 DROP TABLE public.storage_diff;

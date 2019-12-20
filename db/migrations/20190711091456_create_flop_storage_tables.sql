@@ -233,9 +233,6 @@ CREATE INDEX flop_kicks_kicks_index
 COMMENT ON TABLE maker.flop_kicks
     IS E'@name flopKicksStorage\n@omit';
 
--- prevent naming conflict with maker.flop_kick in postgraphile
--- COMMENT ON TABLE maker.flop_kicks IS E'@name flopKicksStorage';
-
 CREATE TABLE maker.flop_live
 (
     id         SERIAL PRIMARY KEY,
