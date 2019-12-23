@@ -1,10 +1,11 @@
 # [MakerDAO](https://makerdao.com) [VulcanizeDB](https://github.com/makerdao/vulcanizedb) Transformers
 
-[![Build Status](https://travis-ci.com/makerdao/vdb-mcd-transformers.svg?token=yVLfQ4hNQCqvt2qjLkus&branch=staging)](https://travis-ci.com/makerdao/vdb-mcd-transformers)
+[![Build Status](https://travis-ci.com/makerdao/vdb-lite-mcd-transformers.svg?branch=staging)](https://travis-ci.com/makerdao/vdb-lite-mcd-transformers)
 
 ## About
 
 Vulcanize DB is a set of tools that make it easier for developers to write application-specific indexes and caches for dapps built on Ethereum.
+Note: this is a fork of the [vdb-mcd-transformers](https://github.com/makerdao/vdb-mcd-transformers), and should be copied as a remote in that directory for imports to resolve.
 
 ## Dependencies
  - Go 1.11+
