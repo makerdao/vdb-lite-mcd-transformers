@@ -37,4 +37,4 @@ fi
 
 echo "Starting transformer execution..."
 # Fire up execute
-./vulcanizedb execute --config config.toml
+./vulcanizedb execute --config config.toml --recheck-headers=true
