@@ -9514,6 +9514,13 @@ CREATE TABLE maker.pot_chi (
 
 
 --
+-- Name: TABLE pot_chi; Type: COMMENT; Schema: maker; Owner: -
+--
+
+COMMENT ON TABLE maker.pot_chi IS '@omit';
+
+
+--
 -- Name: pot_chi_id_seq; Type: SEQUENCE; Schema: maker; Owner: -
 --
 
@@ -9575,6 +9582,13 @@ CREATE TABLE maker.pot_dsr (
     header_id integer NOT NULL,
     dsr numeric NOT NULL
 );
+
+
+--
+-- Name: TABLE pot_dsr; Type: COMMENT; Schema: maker; Owner: -
+--
+
+COMMENT ON TABLE maker.pot_dsr IS '@omit';
 
 
 --
@@ -9742,6 +9756,13 @@ CREATE TABLE maker.pot_live (
 
 
 --
+-- Name: TABLE pot_live; Type: COMMENT; Schema: maker; Owner: -
+--
+
+COMMENT ON TABLE maker.pot_live IS '@omit';
+
+
+--
 -- Name: pot_live_id_seq; Type: SEQUENCE; Schema: maker; Owner: -
 --
 
@@ -9774,6 +9795,13 @@ CREATE TABLE maker.pot_pie (
 
 
 --
+-- Name: TABLE pot_pie; Type: COMMENT; Schema: maker; Owner: -
+--
+
+COMMENT ON TABLE maker.pot_pie IS '@omit';
+
+
+--
 -- Name: pot_pie_id_seq; Type: SEQUENCE; Schema: maker; Owner: -
 --
 
@@ -9803,6 +9831,13 @@ CREATE TABLE maker.pot_rho (
     header_id integer NOT NULL,
     rho numeric NOT NULL
 );
+
+
+--
+-- Name: TABLE pot_rho; Type: COMMENT; Schema: maker; Owner: -
+--
+
+COMMENT ON TABLE maker.pot_rho IS '@omit';
 
 
 --
@@ -9839,6 +9874,13 @@ CREATE TABLE maker.pot_user_pie (
 
 
 --
+-- Name: TABLE pot_user_pie; Type: COMMENT; Schema: maker; Owner: -
+--
+
+COMMENT ON TABLE maker.pot_user_pie IS '@omit';
+
+
+--
 -- Name: pot_user_pie_id_seq; Type: SEQUENCE; Schema: maker; Owner: -
 --
 
@@ -9871,6 +9913,13 @@ CREATE TABLE maker.pot_vat (
 
 
 --
+-- Name: TABLE pot_vat; Type: COMMENT; Schema: maker; Owner: -
+--
+
+COMMENT ON TABLE maker.pot_vat IS '@omit';
+
+
+--
 -- Name: pot_vat_id_seq; Type: SEQUENCE; Schema: maker; Owner: -
 --
 
@@ -9900,6 +9949,13 @@ CREATE TABLE maker.pot_vow (
     header_id integer NOT NULL,
     vow integer NOT NULL
 );
+
+
+--
+-- Name: TABLE pot_vow; Type: COMMENT; Schema: maker; Owner: -
+--
+
+COMMENT ON TABLE maker.pot_vow IS '@omit';
 
 
 --
@@ -12305,6 +12361,13 @@ CREATE TABLE public.storage_diff (
     storage_key bytea,
     storage_value bytea
 );
+
+
+--
+-- Name: TABLE storage_diff; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.storage_diff IS '@omit';
 
 
 --
@@ -17061,13 +17124,6 @@ CREATE INDEX flip_kicks_header_id_index ON maker.flip_kicks USING btree (header_
 
 
 --
--- Name: flip_kicks_kicks_index; Type: INDEX; Schema: maker; Owner: -
---
-
-CREATE INDEX flip_kicks_kicks_index ON maker.flip_kicks USING btree (kicks);
-
-
---
 -- Name: flip_tau_address_index; Type: INDEX; Schema: maker; Owner: -
 --
 
@@ -18468,6 +18524,13 @@ CREATE INDEX header_sync_logs_transaction ON public.header_sync_logs USING btree
 
 
 --
+-- Name: header_sync_logs_untransformed; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX header_sync_logs_untransformed ON public.header_sync_logs USING btree (transformed) WHERE (transformed IS FALSE);
+
+
+--
 -- Name: header_sync_receipts_contract_address; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -18493,6 +18556,13 @@ CREATE INDEX header_sync_transactions_header ON public.header_sync_transactions 
 --
 
 CREATE INDEX headers_block_number ON public.headers USING btree (block_number);
+
+
+--
+-- Name: headers_check_count; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX headers_check_count ON public.headers USING btree (check_count);
 
 
 --
