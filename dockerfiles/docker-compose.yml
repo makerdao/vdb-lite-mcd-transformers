@@ -1,0 +1,69 @@
+
+# This composition runs a vdb lite instance with automatic servcice restarts,
+# preconfigured for mainnet. This instance is not statediff-enabled.
+#
+# When running you can access:
+# postgres   @ localhost:5432
+# graph(i)ql @ localhost:5000
+#
+# The database service stores the data on the *host* machine in a docker volume.
+# This means that if the cluster is gracefully stopped, it can be restarted again
+# without data loss.
+#
+# Commands:
+# To start the cluster: `> docker-compose up`
+# To stop the cluster, just `ctrl+c` (once, to allow a graceful exit)
+# To reset the cluster: `docker-compose down --volumes` (after stopping the cluster)
+
+version: "3.7"
+services:
+  header-sync:
+    image: makerdao/vdb-headersync:v0.0.11-lite-for-compose
+    env_file: env.txt
+    environment:
+      - CLIENT_IPCPATH=https://geth0.mainnet.makerfoundation.com:8545
+      - DATABASE_NAME=vdb
+      - DATABASE_HOSTNAME=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=vdb
+      - DATABASE_PASSWORD=vdb
+      - STARTING_BLOCK_NUMBER=8928152
+    depends_on:
+      - db
+    command: ["./wait-for-it.sh", "db:5432", "--strict", "--", "./startup_script.sh"]
+    restart: unless-stopped
+
+  execute:
+    image: makerdao/vdb-execute:v1.0.1-mainnet-lite-for-compose
+    env_file: env.txt
+    environment:
+      - CLIENT_IPCPATH=https://geth0.mainnet.makerfoundation.com:8545
+      - DATABASE_NAME=vdb
+      - DATABASE_HOSTNAME=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=vdb
+      - DATABASE_PASSWORD=vdb
+    depends_on:
+      - db
+    command: ["./wait-for-it.sh", "db:5432", "--strict", "--", "./startup_script.sh"]
+    restart: unless-stopped
+
+  db:
+    image: postgres:12.1-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=vdb
+      - POSTGRES_PASSWORD=vdb
+    restart: always
+
+  postgraphile:
+    image: makerdao/vdb-postgraphile
+    ports:
+      - 5000:5000
+    environment:
+      - SCHEMAS=public,maker
+      - DATABASE_URL=postgres://vdb:vdb@db:5432/vdb
+    depends_on:
+      - db
+    restart: always
