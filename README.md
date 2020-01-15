@@ -7,6 +7,9 @@
 Vulcanize DB is a set of tools that make it easier for developers to write application-specific indexes and caches for dapps built on Ethereum.
 Note: this is a fork of the [vdb-mcd-transformers](https://github.com/makerdao/vdb-mcd-transformers), and should be copied as a remote in that directory for imports to resolve.
 
+## Running in compose cluster
+`dockerfiles/docker-compose.yml` defines a preconfigured cluster to run using images from docker hub. That file alone should be enough to get a local cache up and running, including datastore and graphql endpoint.
+
 ## Dependencies
  - Go 1.11+
  - Postgres 11
