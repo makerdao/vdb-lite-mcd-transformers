@@ -1,0 +1,57 @@
+
+# This composition runs header sync and execute with automatic restarts.
+# Environment variables for each can be set in their respective `.env` file,
+# or overridden with a shell variable.
+
+version: "3.7"
+services:
+  header-sync:
+    image: makerdao/vdb-headersync:v0.0.11-lite-for-compose
+    env_file: env.txt
+    environment:
+      - CLIENT_IPCPATH=https://geth0.mainnet.makerfoundation.com:8545
+      - DATABASE_NAME=vdb
+      - DATABASE_HOSTNAME=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=vdb
+      - DATABASE_PASSWORD=vdb
+      - STARTING_BLOCK_NUMBER=8928152
+    depends_on:
+      - db
+    command: ["./wait-for-it.sh", "db:5432", "--strict", "--", "./startup_script.sh"]
+    restart: unless-stopped
+
+  execute:
+    image: makerdao/vdb-execute:v1.0.1-mainnet-lite-for-compose
+    env_file: env.txt
+    environment:
+      - CLIENT_IPCPATH=https://geth0.mainnet.makerfoundation.com:8545
+      - DATABASE_NAME=vdb
+      - DATABASE_HOSTNAME=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=vdb
+      - DATABASE_PASSWORD=vdb
+    depends_on:
+      - db
+    command: ["./wait-for-it.sh", "db:5432", "--strict", "--", "./startup_script.sh"]
+    restart: unless-stopped
+
+  db:
+    image: postgres:12.1-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=vdb
+      - POSTGRES_PASSWORD=vdb
+    restart: always
+
+  postgraphile:
+    image: makerdao/vdb-postgraphile
+    ports:
+      - 5000:5000
+    environment:
+      - SCHEMAS=public,maker
+      - DATABASE_URL=postgres://vdb:vdb@db:5432/vdb
+    depends_on:
+      - db
+    restart: always
