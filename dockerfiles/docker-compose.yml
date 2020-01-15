@@ -1,7 +1,19 @@
 
-# This composition runs header sync and execute with automatic restarts.
-# Environment variables for each can be set in their respective `.env` file,
-# or overridden with a shell variable.
+# This composition runs a vdb lite instance with automatic servcice restarts,
+# preconfigured for mainnet. This instance is not statediff-enabled.
+#
+# When running you can access:
+# postgres   @ localhost:5432
+# graph(i)ql @ localhost:5000
+#
+# The database service stores the data on the *host* machine in a docker volume.
+# This means that if the cluster is gracefully stopped, it can be restarted again
+# without data loss.
+#
+# Commands:
+# To start the cluster: `> docker-compose up`
+# To stop the cluster, just `ctrl+c` (once, to allow a graceful exit)
+# To reset the cluster: `docker-compose down --volumes` (after stopping the cluster)
 
 version: "3.7"
 services:
